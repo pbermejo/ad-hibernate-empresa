@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 2 feb 2022 17:40:51 by Hibernate Tools 5.5.7.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="empresahb" dynamic-insert="false" dynamic-update="false" mutable="true" name="empresa.Proxecto" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="proxecto">
+        <id name="numProxecto" type="int">
+            <column name="NumProxecto"/>
+            <generator class="assigned"/>
+        </id>
+        <property generated="never" lazy="false" name="nomeProxecto" optimistic-lock="true" type="string" unique="false">
+            <column length="25" name="NomeProxecto"/>
+        </property>
+        <property generated="never" lazy="false" name="lugar" optimistic-lock="true" type="string" unique="false">
+            <column length="25" name="Lugar"/>
+        </property>
+    </class>
+</hibernate-mapping>

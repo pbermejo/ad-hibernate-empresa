@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 2 feb 2022 17:40:51 by Hibernate Tools 5.5.7.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="empresahb" dynamic-insert="false" dynamic-update="false" mutable="true" name="empresa.Empregado" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="empregado">
+        <id name="nss" type="string">
+            <column length="15" name="NSS"/>
+            <generator class="assigned"/>
+        </id>
+        <property generated="never" lazy="false" name="nome" optimistic-lock="true" type="string" unique="false">
+            <column length="25" name="Nome"/>
+        </property>
+        <property generated="never" lazy="false" name="apelido1" optimistic-lock="true" type="string" unique="false">
+            <column length="25" name="Apelido1"/>
+        </property>
+        <property generated="never" lazy="false" name="apelido2" optimistic-lock="true" type="string" unique="false">
+            <column length="25" name="Apelido2"/>
+        </property>
+        <property generated="never" lazy="false" name="salario" optimistic-lock="true" type="java.lang.Float" unique="false">
+            <column name="Salario" precision="12" scale="0"/>
+        </property>
+        <property generated="never" lazy="false" name="dataNacemento" optimistic-lock="true" type="date" unique="false">
+            <column length="10" name="DataNacemento"/>
+        </property>
+        <property generated="never" lazy="false" name="sexo" optimistic-lock="true" type="java.lang.Character" unique="false">
+            <column length="1" name="Sexo"/>
+        </property>
+        
+        <!-- With set of value -->
+        <!-- 
+        <set name="telefonos" table="telefono">
+        	<key>
+        		<column name="NSS" not-null="true" />
+       		</key>
+       		<element column="NumTelefono" type="string" />
+        </set>
+         -->
+         
+         <!-- With set of class -->
+         <!-- 
+         <set name="telefonos" table="telefono">
+         	<key>
+        		<column name="NSS" not-null="true" />
+       		</key>
+        	<composite-element class="Telefono">
+        		<property name="NumTelefono" column="NumTelefono" type="integer" not-null="true" />
+        		<property name="Descricion" column="Descricion" type="string" />
+        	</composite-element>
+         </set>
+          -->
+          
+          <!-- With map -->
+          <!--
+        <map name="telefonos" table="telefono">
+        	<key>
+        		<column name="NSS" not-null="true" />
+        	</key>
+        	<map-key column="NumTelefono" />
+        	<element column="Descricion" type="string" />
+        </map>
+        -->
+        
+        <!-- With bag -->
+        <!-- 
+        <bag name="telefonos" table="telefono">
+        	<key>
+        		<column name="NSS" not-null="true" />
+        	</key>
+        	<composite-element class="empresa.Telefono">
+        		<property name="NumTelefono" column="NumTelefono" type="integer" not-null="true" />
+        		<property name="Descricion" column="Descricion" type="string" />
+        	</composite-element>
+        </bag>     
+         -->
+         
+         <!-- With list -->
+         <list name="telefonos" table="telefono">
+         	<key>
+         		<column name="NSS" not-null="true" />
+         	</key>
+         	<list-index column="NumTelefono" />
+        	<element column="Descricion" type="string" />
+         </list>
+         
+         <!--  With idbag -->
+         <!-- 
+         <idbag name="horasExtra" table="horas" order-by="Fecha desc">
+         	<collection-id type="java.lang.Integer" column="Id">
+         		<generator class="increment"/>
+         	</collection-id>
+         	<key>
+         		<column name="NSS" not-null="true"/>
+         	</key>
+         	<composite-element class="empresa.Horas">
+        		<property name="Fecha" column="Fecha" type="java.util.Date" not-null="true" />
+        		<property name="Horas" column="Horas" type="java.lang.Integer" not-null="true" />
+        	</composite-element>
+         </idbag>
+          -->
+          <!-- With set -->
+          <set name="horasExtra" table="horas" sort="utils.ComparadorFecha">
+         	<key>
+        		<column name="Id" not-null="true" />
+       		</key>
+        	<composite-element class="empresa.Horas">
+        		<property name="Fecha" column="Fecha" type="java.util.Date" not-null="true" />
+        		<property name="Horas" column="Horas" type="java.lang.Integer" />
+        	</composite-element>
+         </set>
+         
+         
+         <!--  Mapeo clase componente -->         
+         <component name="domicilio" class="empresa.Domicilio">
+         	<parent name="empregado"/>
+         	<property name="calle" type="string">
+         		<column name="Calle" length="30" not-null="true"/>
+         	</property>
+         	<property name="numero" type="java.lang.Integer">
+         		<column name="Numero"/>
+         	</property>
+         	<property name="piso" type="string">
+         		<column name="Piso" length="3"/>
+         	</property>
+         	<property name="codigoPostal" type="string">
+         		<column name="CodigoPostal" length="5"/>
+         	</property>
+         	<property name="localidad" type="string">
+         		<column name="Localidad" length="30" not-null="true"/>
+         	</property>
+         	<property name="provincia" type="string">
+         		<column name="Provincia" length="30" not-null="true"/>
+         	</property>
+         </component>
+    </class>
+</hibernate-mapping>
